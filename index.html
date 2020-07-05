@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Work Day Scheduler</title>
+  </head>
+
+  <body>
+    <header class="jumbotron">
+      <h1 class="display-3">Work Day Scheduler</h1>
+      <p class="lead">A simple calendar app for scheduling your work day</p>
+      <p id="currentDay" class="lead"></p>
+    </header>
+    <div class="container">
+      <!-- Timeblocks go here -->
+      <!-- 9AM Start -->
+      <div class="row">
+        <button id="NineAM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">9AM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-NineAM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 10AM Start -->
+      <div class="row">
+        <button id="TenAM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">10AM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-TenAM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 11AM Start -->
+      <div class="row">
+        <button id="ElevenAM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">11AM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-ElevenAM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 12PM Start -->
+      <div class="row">
+        <button id="TwelvePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">12PM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-TwelvePM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 1PM Start -->
+      <div class="row">
+        <button id="OnePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">1PM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-OnePM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 2PM Start -->
+      <div class="row">
+        <button id="TwoPM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">2PM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-TwoPM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 3PM Start -->
+      <div class="row">
+        <button id="ThreePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">3PM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-ThreePM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 4PM Start -->
+      <div class="row">
+        <button id="FourPM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">4PM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-FourPM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div>
+      <!-- 5PM Start -->
+      <div class="row">
+        <button id="FivePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">5PM <i class="far fa-plus-square"></i></button>
+        <div class="card col-8 border-danger p-0">
+          <ul id="item-FivePM" class="list-group"></ul>
+        </div>
+        <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
+      </div> 
+    </div>
+    
+  <!-- Modal -->
+  <div class="modal fade" id="item-form-modal" tabindex="-1" role="dialog" aria-labelledby="item-form-modal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="item-form-modal">Add New Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="modalItemDescription">Item description</label>
+            <textarea id="modalItemDescription" rows="3" class="form-control"></textarea>
+          </div>
+          <div class="form-group m-0">
+            <!-- Header -->
+            <label for="modalTimeStamp">Time Due</label>
+            <!-- Time Inputs -->
+            <div class="row" id="timeInput">
+
+              <div class="dropdown col-2" id="hourDropdown">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="btn btn-info dropdown-toggle mb-1" href="#">
+                  <span id="hourModal">Hour</span><span class="caret"></span></a>
+                <ul class="dropdown-menu hour-dropdown"></ul>
+              </div>
+
+
+              <div class="dropdown col-2" id="minutesDropdown">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="btn btn-info dropdown-toggle" href="#">
+                  <span id="minutesModal">Minutes</span><span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <li class="dropdown-item" id="topHour">:00</li>
+                  <li class="dropdown-item" id="quarterPast">:15</li>
+                  <li class="dropdown-item" id="halfPast">:30</li>
+                  <li class="dropdown-item" id="quarterTo">:45</li>
+                </ul>
+              </div>
+              
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-save">Save Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="./assets/js/script.js"></script>
+
+  </body>
+</html>
