@@ -102,3 +102,11 @@ ul.list-group {
 .dropover-active {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+@media screen and (max-width: 768px) {
+.saveBtn:hover,
+.addBtn:hover {
+  font-size: 15px;
+  transition: none;
+}
+}
