@@ -81,3 +81,16 @@ textarea{
   color: white;
   outline: none;
 }
+
+ul.list-group {
+  min-height: 130px;
+}
+
+.row {
+  height: 100%;
+}
+
+#timeInput {
+  white-space: nowrap;
+  height: 30px;
+}
