@@ -103,6 +103,11 @@ ul.list-group {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+p, textarea {
+  width: 80%;
+  margin-right: 0;
+}
+
 @media screen and (max-width: 768px) {
   .saveBtn:hover,
   .addBtn:hover {

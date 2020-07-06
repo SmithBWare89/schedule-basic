@@ -63,16 +63,23 @@ function saveItems() {
 
 function createItems(itemText, time, itemButton) {
     var itemLi = $("<li>")
-        .addClass("list-group-item w-80");
+        .addClass("list-group-item w-100 border-dark");
     var itemP = $("<p>")
-        .addClass("m-1")
+        .addClass("m-1 w-75")
         .text(itemText);
     var itemSpan = $("<span>")
         .addClass("badge badge-dark")
         .attr('id', 'item-time')
         .text(time);
+    var trashCanButton = $("<button>")
+        .addClass("btn btn-danger")
+        .attr("id", "trashCan");
+    var trashCanIcon = $("<span>")
+        .addClass("oi oi-trash");
+    
+    trashCanButton.append(trashCanIcon)
 
-    itemLi.append(itemSpan, itemP);
+    itemLi.append(itemSpan, itemP, trashCanButton);
 
     $("#item-" + itemButton)
         .append(itemLi);
@@ -98,7 +105,7 @@ $(".list-group").on("click", "p", function() {
       .trim();
     // creating dynamic elements
     var textInput = $("<textarea>")
-      .addClass("form-control")
+      .addClass("form-control w-75")
       .val(text);
       // Replaces the p from Add Task with textarea element
     $(this).replaceWith(textInput);
@@ -108,37 +115,37 @@ $(".list-group").on("click", "p", function() {
     textInput.trigger("select");
   });
 
-  $(".list-group").on("blur", "textarea", function(){
-    // get the textarea's current value/text when it's clicked on
-    text = $(this)
-      .val()
-      .trim();
-  
-    // get the parent ul's id attribute
-    var status = $(this)
-      .closest(".list-group")
-      .attr("id")
-      .replace("item-", "");
-  
-    var index = $(this)
-      .closest(".list-group-item")
-      .index();
-  
-    items[status][index].item = text;
-    
-        $(".saveBtn").on("click", function() {
-        // Converts textarea back into a p element
-        console.log(text)
-        var taskP = $("<p>")
-        .addClass("m-1")
-        .text(text);
+$(".list-group").on("blur", "textarea", function(){
+// get the textarea's current value/text when it's clicked on
+text = $(this)
+    .val()
+    .trim();
 
-    // replace textArea with recreated p element
-    $("textarea").replaceWith(taskP);
-    })
+// get the parent ul's id attribute
+var status = $(this)
+    .closest(".list-group")
+    .attr("id")
+    .replace("item-", "");
 
-    saveItems();
-  });
+var index = $(this)
+    .closest(".list-group-item")
+    .index();
+
+items[status][index].item = text;
+
+    $(".saveBtn").on("click", function() {
+    // Converts textarea back into a p element
+    console.log(text)
+    var taskP = $("<p>")
+    .addClass("m-1")
+    .text(text);
+
+// replace textArea with recreated p element
+$("textarea").replaceWith(taskP);
+})
+
+saveItems();
+});
 
 // modal was triggered
 $("#item-form-modal").on("show.bs.modal", function() {
@@ -299,9 +306,9 @@ function auditNewItem() {
     var currentTime = moment();
 
     if (currentTime.subtract(30, 'minutes') <= itemMoment) {
-        itemLi.addClass("present");
-    } else if (currentTime.isBefore(itemMoment)){
         itemLi.addClass("future");
+    } else if (currentTime.isBefore(itemMoment)){
+        itemLi.addClass("present");
     } else {
         itemLi.addClass("past");
     }
@@ -343,3 +350,19 @@ loadItems();
   ThreePMEl.addEventListener("click", idCapture);
   FourPMEl.addEventListener("click", idCapture);
   FivePMEl.addEventListener("click", idCapture);
+
+// Trash Can Event Listener
+    $("#trashCan").on("click",function(){
+        var arrName = $(this)
+        .closest(".card .list-group")
+        .attr("id")
+        .replace("item-", "");
+
+        var index = $(this)
+            .closest("li")
+            .index();
+
+        delete items[arrName][index];
+        $(this).closest("li").remove();
+        saveItems();
+    })
