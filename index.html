@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Work Day Scheduler</title>
   </head>
 
@@ -33,7 +33,7 @@
         <!-- 9AM Start -->
         <div class="row">
           <button id="NineAM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">9:00 AM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-NineAM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -41,7 +41,7 @@
         <!-- 10AM Start -->
         <div class="row">
           <button id="TenAM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">10:00 AM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-TenAM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -49,7 +49,7 @@
         <!-- 11AM Start -->
         <div class="row">
           <button id="ElevenAM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">11:00 AM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-ElevenAM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -57,7 +57,7 @@
         <!-- 12PM Start -->
         <div class="row">
           <button id="TwelvePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">12:00 PM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-TwelvePM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -65,7 +65,7 @@
         <!-- 1PM Start -->
         <div class="row">
           <button id="OnePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">13:00/1:00 PM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-OnePM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -73,7 +73,7 @@
         <!-- 2PM Start -->
         <div class="row">
           <button id="TwoPM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">14:00/2:00 PM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-TwoPM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -81,7 +81,7 @@
         <!-- 3PM Start -->
         <div class="row">
           <button id="ThreePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">15:00/3:00 PM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-ThreePM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -89,7 +89,7 @@
         <!-- 4PM Start -->
         <div class="row">
           <button id="FourPM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">16:00/4:00 PM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-FourPM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
@@ -97,15 +97,68 @@
         <!-- 5PM Start -->
         <div class="row">
           <button id="FivePM" class="col-2 addBtn p-0" data-toggle="modal" data-target="#item-form-modal">17:00/5:00 PM <i class="far fa-plus-square"></i></button>
-          <div class="card col-8 border-danger p-0">
+          <div class="card col-8 border-dark p-0">
             <ul id="item-FivePM" class="list-group"></ul>
           </div>
           <button class="col-2 saveBtn p-0"><i class="far fa-save"></i></button>
         </div> 
       </div>
     </div>
-
+    <!-- Modal -->
+    <div class="modal fade" id="item-form-modal" tabindex="-1" role="dialog" aria-labelledby="item-form-modal"
+    aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="item-form-modal">Add New Item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="modalItemDescription">Item description</label>
+                <textarea id="modalItemDescription" rows="3" class="form-control"></textarea>
+              </div>
+              <div class="form-group m-0">
+                <!-- Header -->
+                <label for="modalTimeStamp">Time Due</label>
+                <!-- Time Inputs -->
+                <div class="row" id="timeInput">
+                  <!-- Hours Dropdown -->
+                  <div class="dropdown col-2" id="hourDropdown">
+                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="btn btn-info dropdown-toggle mb-1" href="#">
+                      <span id="hourModal">Hour</span><span class="caret"></span></a>
+                    <ul class="dropdown-menu hour-dropdown"></ul>
+                  </div>
+                  <!-- Minutes Dropdown -->
+                  <div class="dropdown col-2" id="minutesDropdown">
+                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="btn btn-info dropdown-toggle" href="#">
+                      <span id="minutesModal">Minutes</span><span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <li class="dropdown-item" id="topHour">00</li>
+                      <li class="dropdown-item" id="quarterPast">15</li>
+                      <li class="dropdown-item" id="halfPast">30</li>
+                      <li class="dropdown-item" id="quarterTo">45</li>
+                    </ul>
+                    <ul class="dropdown-menu" id="am-pm" aria-labelledby="dropdownMenu2">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-save">Save Item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
