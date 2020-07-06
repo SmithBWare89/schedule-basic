@@ -209,6 +209,56 @@ $("#item-form-modal .btn-save").click(function() {
         }
 });
 
+$(".card .list-group").sortable({
+    scroll: false,
+    tolerance: "pointer",
+    helper: "clone",
+    activate: function (event) {
+        $(this).addClass("dropover");
+      },
+      deactivate: function (event) {
+        $(this).removeClass('dropover');
+      },
+      over: function (event) {
+        $("event.target").addClass('dropover-active');
+      },
+      out: function (event) {
+        $("event.target").removeClass('dropover-active');
+      },
+      update: function(event) {
+        // array to store the task data in
+        var tempArr = [];
+    
+        // loop over current set of children in sortable list
+        $(this).children().each(function () {
+          var text = $(this)
+            .find("p")
+            .text()
+            .trim();
+    
+          var date = $(this)
+            .find("span")
+            .text()
+            .trim();
+    
+          // add task data to the temp array as an object
+          tempArr.push({
+            text: text,
+            date: date
+          });
+        });
+    
+        // trim down list's ID to match object property
+        var arrName = $(this)
+          .attr("id")
+          .replace("item-", "");
+    
+        // update array on tasks object and save
+        items[arrName] = tempArr;
+        saveItems();
+      }
+})
+
 function hourGenerator(hourOption) {
     if (buttonClicked === "NineAM") {
         hourOption.text("9").attr('id', 'hourSelected');
