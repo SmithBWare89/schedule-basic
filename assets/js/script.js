@@ -41,7 +41,8 @@ function loadItems(){
     }
 
     if (momentTime.format("MMMM Do YYYY") > items.momentTime){
-        return localStorage.clear();
+        $(".card .list-group").remove("li");
+        localStorage.clear();
     }
 
     $.each(items, function(list, arr, index){
@@ -314,9 +315,9 @@ function auditItems(itemEl) {
     var itemLi = $(itemEl).find("li");
 
     if (currentTime.subtract(30, 'minutes') <= itemMoment) {
-        itemLi.addClass("present");
-    } else if (currentTime.isBefore(itemMoment)){
         itemLi.addClass("future");
+    } else if (currentTime.isBefore(itemMoment)){
+        itemLi.addClass("present");
     } else {
         itemLi.addClass("past");
     }

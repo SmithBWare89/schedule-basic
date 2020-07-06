@@ -104,9 +104,9 @@ ul.list-group {
 }
 
 @media screen and (max-width: 768px) {
-.saveBtn:hover,
-.addBtn:hover {
-  font-size: 15px;
-  transition: none;
-}
+  .saveBtn:hover,
+  .addBtn:hover {
+    font-size: 15px;
+    transition: none;
+  }
 }
