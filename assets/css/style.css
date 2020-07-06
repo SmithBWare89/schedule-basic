@@ -63,34 +63,9 @@ textarea{
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
-  outline: none;
 }
 
-.saveBtn:hover,
-.addBtn:hover {
+.saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
-  outline: none;
-}
-
-.addBtn {
-  border-left: 1px solid black;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  background-color: #28a745;
-  color: white;
-  outline: none;
-}
-
-ul.list-group {
-  min-height: 130px;
-}
-
-.row {
-  height: 100%;
-}
-
-#timeInput {
-  padding: 5px;
-  height: 80px;
 }
