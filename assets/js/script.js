@@ -322,13 +322,20 @@ loadItems();
 function sliceArray (index, arrName) {
     var slicedArray;
     // if the index of the li is 0
-    if (index === 0) {
+    if (index === 0 && items[arrName].length === index) {
+        // slice the first index
+        slicedArray = items[arrName].slice();
+        // set the new items array to equal the sliced array
+        items[arrName] = slicedArray;
+        return saveItems();
+    }
+    else if (index === 0 && items[arrName].length > 0){
         // slice everything after the first index
         slicedArray = items[arrName].slice([index + 1]);
         // set the new items array to equal the sliced array
         items[arrName] = slicedArray;
         return saveItems();
-    } 
+    }
     // else if the index of the li is equal to the index of the last item in the array
     else if(items[arrName].length - 1 === index) {
         // remove the last item in the array
