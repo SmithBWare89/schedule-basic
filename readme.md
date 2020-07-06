@@ -7,6 +7,7 @@
 - <img src="./assets/images/Javascript.png" height="200" width="200">
 
 # Application Features
+### Item Persistence Upon Screen Refresh
 ### Past Items Coloring
 ![Display of Past Items Greyed Out](./assets/images/past-items.gif)
 ### Button Animations
