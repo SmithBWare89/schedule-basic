@@ -20,13 +20,6 @@ var ThreePMEl = document.querySelector("#ThreePM");
 var FourPMEl = document.querySelector("#FourPM");
 var FivePMEl = document.querySelector("#FivePM");
 
-function idCapture() {
-    if (buttonClicked) {
-        buttonClicked = null;
-    }
-    return buttonClicked = $(event.target).attr('id');
-};
-
 // Modal Form Script
     // modal was triggered
     $(".list-group").on("click", "p", function() {
@@ -147,7 +140,6 @@ function idCapture() {
             }
     });
 
-
 // Generate Hours In Modal Form
     function hourGenerator(hourOption) {
         if (buttonClicked === "NineAM") {
@@ -179,6 +171,38 @@ function idCapture() {
             return $(".hour-dropdown").append(hourOption);
         }
     }
+
+// Capture Id of Timeslot 1Button Clicked
+    function idCapture() {
+        if (buttonClicked) {
+            buttonClicked = null;
+        }
+        return buttonClicked = $(event.target).attr('id');
+    };
+
+// Create Items On Page
+    function createItems(itemText, time, itemButton) {
+        var itemLi = $("<li>")
+            .addClass("list-group-item w-80");
+        var itemP = $("<p>")
+            .addClass("m-1")
+            .text(itemText);
+        var itemSpan = $("<span>")
+            .addClass("badge badge-dark")
+            .attr('id', 'item-time')
+            .text(time);
+
+        itemLi.append(itemSpan, itemP);
+
+        $("#item-" + itemButton)
+            .append(itemLi);
+
+        // Save Item
+        saveItems();
+
+        // Audit the new item
+        auditNewItem();
+    };
 
 // AM Event Listeners
 NineAMEl.addEventListener("click", idCapture);
