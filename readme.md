@@ -18,6 +18,4 @@
 ![Modal Form Input](./assets/images/modal-form.gif)
 ### Cards Appearing After Submitting Data
 ![Task Item Card Appearing](./assets/images/card-appearance.gif)
-### Sortable Cards
-![Image of Card Sorting](./assets/images/sortable-items.gif)
 
