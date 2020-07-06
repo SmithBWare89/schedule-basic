@@ -250,6 +250,48 @@ var FivePMEl = document.querySelector("#FivePM");
         });
     };
 
+// Audit Items
+    // Set Interval To Check All Items
+    setInterval(function() {
+        $(".card .list-group").each(function(){
+            auditItems(this);
+        });
+    }, (1000 * 60) * 30);
+
+    // Audit Items
+    function auditItems(itemEl) {
+        var itemTime = $(itemEl).find("span").text().trim();
+        var itemMoment = moment(itemTime, "h:mm A");
+        var currentTime = moment();
+    
+        var itemLi = $(itemEl).find("li");
+    
+        if (currentTime.subtract(30, 'minutes') <= itemMoment) {
+            itemLi.addClass("present");
+        } else if (currentTime.isBefore(itemMoment)){
+            itemLi.addClass("future");
+        } else {
+            itemLi.addClass("past disabled");
+        }
+    }
+
+    // Audit Newly Created Items
+    function auditNewItem() {
+        var item = $(".card .list-group");
+        var itemLi = item.find("li");
+        var itemTime = $(item).find("span").text().trim();
+        var itemMoment = moment(itemTime, "h:mm A");
+        var currentTime = moment();
+    
+        if (currentTime.subtract(30, 'minutes') <= itemMoment) {
+            itemLi.addClass("present");
+        } else if (currentTime.isBefore(itemMoment)){
+            itemLi.addClass("future");
+        } else {
+            itemLi.addClass("past disabled");
+        }
+    }
+    
 loadItems();
 
 // AM Event Listeners
