@@ -217,55 +217,6 @@ $("#item-form-modal .btn-save").click(function() {
         }
 });
 
-$(".card .list-group").sortable({
-    scroll: false,
-    tolerance: "pointer",
-    helper: "clone",
-    activate: function (event) {
-        $(this).addClass("dropover");
-      },
-      deactivate: function (event) {
-        $(this).removeClass('dropover');
-      },
-      over: function (event) {
-        $("event.target").addClass('dropover-active');
-      },
-      out: function (event) {
-        $("event.target").removeClass('dropover-active');
-      },
-      update: function(event) {
-        // array to store the task data in
-        var tempArr = [];
-    
-        // loop over current set of children in sortable list
-        $(this).children().each(function () {
-          var text = $(this)
-            .find("p")
-            .text()
-            .trim();
-    
-          var date = $(this)
-            .find("span")
-            .text()
-            .trim();
-    
-          // add task data to the temp array as an object
-          tempArr.push({
-            text: text,
-            date: date
-          });
-        });
-    
-        // trim down list's ID to match object property
-        var arrName = $(this)
-          .attr("id")
-          .replace("item-", "");
-    
-        // update array on tasks object and save
-        items[arrName] = tempArr;
-        saveItems();
-      }
-})
 
 function hourGenerator(hourOption) {
     if (buttonClicked === "NineAM") {
@@ -352,17 +303,50 @@ loadItems();
   FivePMEl.addEventListener("click", idCapture);
 
 // Trash Can Event Listener
-    $("#trashCan").on("click",function(){
+    $(".list-group #trashCan").on("click",function(){
         var arrName = $(this)
         .closest(".card .list-group")
         .attr("id")
         .replace("item-", "");
+        console.log(arrName)
 
         var index = $(this)
             .closest("li")
             .index();
-
-        delete items[arrName][index];
+        console.log(index)
+    
+        sliceArray(index, arrName);
         $(this).closest("li").remove();
-        saveItems();
     })
+    
+function sliceArray (index, arrName) {
+    var slicedArray;
+    // if the index of the li is 0
+    if (index === 0) {
+        // slice everything after the first index
+        slicedArray = items[arrName].slice([index + 1]);
+        // set the new items array to equal the sliced array
+        items[arrName] = slicedArray;
+        return saveItems();
+    } 
+    // else if the index of the li is equal to the index of the last item in the array
+    else if(items[arrName].length - 1 === index) {
+        // remove the last item in the array
+        items[arrName].pop();
+        // save the new array in localStorage
+        return saveItems();
+    } 
+    // else if the item within the array is neither the first or last item
+    else if (index > 0 && index < items[arrName].length) {
+        // slice everything up until the items index
+        var firstSlice = items[arrName].slice(0, index);
+        // slice everything after the items index
+        slicedArray = items[arrName].slice(index + 1);
+        // concatenate the two new objects into one array
+        var concatArray = firstSlice.concat(slicedArray);
+        // set the items array to be the new concatenated array
+        items[arrName] = concatArray;
+        // save in localStorage
+        return saveItems();
+    }
+}
