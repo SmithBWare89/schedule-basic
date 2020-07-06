@@ -204,6 +204,54 @@ var FivePMEl = document.querySelector("#FivePM");
         auditNewItem();
     };
 
+// Save Items
+    function saveItems() {
+        localStorage.setItem("items", JSON.stringify(items));
+    }
+
+// Load Items
+    function loadItems(){
+        $("#dailyMoment").text(momentTime.format("dddd, MMMM Do YYYY"));
+        
+        // Parse items key from localStorage
+        items = JSON.parse(localStorage.getItem("items"));    
+        // If there are no items in localStorage then define items
+        if(!items){
+            items = {
+                NineAM: [],
+                TenAM: [],
+                ElevenAM: [],
+                TwelvePM: [],
+                OnePM: [],
+                TwoPM: [],
+                ThreePM: [],
+                FourPM: [],
+                FivePM: [],
+            };
+        }
+
+        $.each(items, function(list, arr){
+            arr.forEach(function(items){
+                if (momentTime.isAfter(items.momentTime)){
+                    $(".card .list-group").remove("li");
+                }
+            });
+        });
+
+        $.each(items, function(list, arr, index){
+            console.log(list, arr);
+            arr.forEach(function(items){
+                createItems(items.item, items.timestamp, list);
+            });
+        });
+
+        $(".card .list-group").each(function(){
+            auditItems(this);
+        });
+    };
+
+loadItems();
+
 // AM Event Listeners
 NineAMEl.addEventListener("click", idCapture);
 TenAMEl.addEventListener("click", idCapture);
