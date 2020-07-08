@@ -86,9 +86,7 @@ function createItems(itemText, time, itemButton) {
 
     // Save Item
     saveItems();
-
-    // Audit the new item
-    auditNewItem();
+    return auditNewItem();
 };
 
 function idCapture() {
@@ -98,7 +96,7 @@ function idCapture() {
     return buttonClicked = $(event.target).attr('id');
 };
 
-$(".list-group").on("click", ".item-text", function() {
+$(".card .list-group").on("click", "p", function() {
     // Convert p tag into javascript object
     text = $(this)
       .text()
@@ -115,7 +113,7 @@ $(".list-group").on("click", ".item-text", function() {
     textInput.trigger("select");
   });
 
-$(".list-group").on("blur", ".edit-text", function(){
+$(".card .list-group").on("blur", "textarea", function(){
 // get the textarea's current value/text when it's clicked on
 text = $(this)
     .val()
@@ -140,7 +138,7 @@ items[status][index].item = text;
     .text(text);
 
 // replace textArea with recreated p element
-$(".edit-text").replaceWith(taskP);
+$(".list-group textarea").replaceWith(taskP);
 
 //     $(".saveBtn").on("click", function() {
 // })
@@ -165,7 +163,6 @@ $("#item-form-modal").on("show.bs.modal", function() {
 // modal is fully visible
 $("#item-form-modal").on("shown.bs.modal", function() {
     // highlight textarea
-    $("#modalItemDescription").val("");
     $("#modalItemDescription").trigger("focus");
 
     // create new Li for hours option
@@ -253,16 +250,16 @@ function hourGenerator(hourOption) {
 
 function auditNewItem() {
     var item = $(".card .list-group");
-    var itemLi = item.find("li");
+    var itemLi = (item.find("li"));
     var itemTime = $(item).find("span").text().trim();
     var itemMoment = moment(itemTime, "h:mm A");
     var currentTime = moment();
 
     if (currentTime.subtract(30, 'minutes') <= itemMoment) {
         itemLi.addClass("future");
-    } else if (currentTime.isBefore(itemMoment)){
+    } else if (currentTime.subtract(30, 'minutes') >= itemMoment) {
         itemLi.addClass("present");
-    } else {
+    } else if (currentTime.isAfter(itemMoment)) {
         itemLi.addClass("past");
     }
 }
@@ -285,24 +282,29 @@ function auditNewItem() {
 
 setInterval(function() {
     $(".card .list-group").each(function(){
-        var itemTime = $(itemEl).find("span").text().trim();
+        var itemTime = $(".card .list-group").find("span").text().trim();
         var itemMoment = moment(itemTime, "h:mm A");
         var currentTime = moment();
     
-        var itemLi = $(itemEl).find("li");
-    
-        if (currentTime.subtract(30, 'minutes') <= itemMoment) {
-            itemLi.classList.remove("present");
-            itemLi.classList.remove("past");
-            itemLi.classList.add("future");
-        } else if (currentTime.isBefore(itemMoment)){
-            itemLi.classList.remove("future");
-            itemLi.classList.remove("past");
-            itemLi.classList.add("present");
-        } else {
-            itemLi.classList.remove("future");
-            itemLi.classList.remove("present");
-            itemLi.classList.add("past");
+        var itemLi = $(".list-group-item");
+
+        if (currentTime.subtract(30, 'minutes') >= itemMoment) {
+            if (itemLi.classList.contains("future")){
+                itemLi.classList.remove("future");
+                return itemLi.classList.add("present");
+            } else {
+                itemLi.classList.add("present");
+            }
+        } else if (currentTime.isAfter(itemMoment)) {
+            if (itemLi.classList.contains("present")) {
+                itemLi.classList.remove("present");
+                return itemLi.classList.add("past");
+            } else if (itemLi.classList.contains("future")) {
+                itemLi.classList.remove("future");
+                return itemLi.classList.add("past");
+            } else {
+                itemLi.classList.add("past");
+            }
         }
     });
 }, 1000);
