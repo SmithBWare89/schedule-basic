@@ -65,7 +65,7 @@ function createItems(itemText, time, itemButton) {
     var itemLi = $("<li>")
         .attr("class", "list-group-item w-100 border-dark");
     var itemP = $("<p>")
-        .attr("class", "m-1 w-75")
+        .attr("class", "m-1 w-75 item-text")
         .text(itemText);
     var itemSpan = $("<span>")
         .attr("class", "badge badge-dark")
@@ -98,14 +98,14 @@ function idCapture() {
     return buttonClicked = $(event.target).attr('id');
 };
 
-$(".list-group").on("click", "p", function() {
+$(".list-group").on("click", ".item-text", function() {
     // Convert p tag into javascript object
     text = $(this)
       .text()
       .trim();
     // creating dynamic elements
     var textInput = $("<textarea>")
-      .addClass("form-control w-75")
+      .addClass("form-control w-75 edit-text")
       .val(text);
       // Replaces the p from Add Task with textarea element
     $(this).replaceWith(textInput);
@@ -115,7 +115,7 @@ $(".list-group").on("click", "p", function() {
     textInput.trigger("select");
   });
 
-$(".list-group").on("blur", "textarea", function(){
+$(".list-group").on("blur", ".edit-text", function(){
 // get the textarea's current value/text when it's clicked on
 text = $(this)
     .val()
@@ -136,11 +136,11 @@ items[status][index].item = text;
     // Converts textarea back into a p element
     console.log(text)
     var taskP = $("<p>")
-    .addClass("m-1")
+    .addClass("m-1 w-75 item-text")
     .text(text);
 
 // replace textArea with recreated p element
-$("textarea").replaceWith(taskP);
+$(".edit-text").replaceWith(taskP);
 
 //     $(".saveBtn").on("click", function() {
 // })
@@ -314,7 +314,7 @@ loadItems();
   TenAMEl.addEventListener("click", idCapture);
   ElevenAMEl.addEventListener("click", idCapture);
 
-//   PM Event Listeners
+// PM Event Listeners
   TwelvePMEl.addEventListener("click", idCapture);
   OnePMEl.addEventListener("click", idCapture);
   TwoPMEl.addEventListener("click", idCapture);
