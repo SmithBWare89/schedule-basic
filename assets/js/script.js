@@ -86,7 +86,6 @@ function createItems(itemText, time, itemButton) {
 
     // Save Item
     saveItems();
-    return auditNewItem();
 };
 
 function idCapture() {
@@ -213,6 +212,7 @@ $("#item-form-modal .btn-save").click(function() {
         });
     
           saveItems();
+          return auditNewItem();
         }
 });
 
@@ -255,9 +255,9 @@ function auditNewItem() {
     var itemMoment = moment(itemTime, "h:mm A");
     var currentTime = moment();
 
-    if (currentTime.subtract(30, 'minutes') <= itemMoment) {
+    if (currentTime.subtract(30, 'minutes').isBefore(itemMoment)) {
         itemLi.addClass("future");
-    } else if (currentTime.subtract(30, 'minutes') >= itemMoment) {
+    } else if (currentTime.subtract(30, 'minutes') > itemMoment) {
         itemLi.addClass("present");
     } else if (currentTime.isAfter(itemMoment)) {
         itemLi.addClass("past");
@@ -286,25 +286,14 @@ setInterval(function() {
         var itemMoment = moment(itemTime, "h:mm A");
         var currentTime = moment();
     
-        var itemLi = $(".list-group-item");
+        var itemLi = $(".card .list-group").find("li");
 
-        if (currentTime.subtract(30, 'minutes') >= itemMoment) {
-            if (itemLi.classList.contains("future")){
+        if (currentTime.subtract(30, 'minutes').isBefore(itemMoment)) {
                 itemLi.classList.remove("future");
-                return itemLi.classList.add("present");
-            } else {
                 itemLi.classList.add("present");
-            }
         } else if (currentTime.isAfter(itemMoment)) {
-            if (itemLi.classList.contains("present")) {
                 itemLi.classList.remove("present");
-                return itemLi.classList.add("past");
-            } else if (itemLi.classList.contains("future")) {
-                itemLi.classList.remove("future");
-                return itemLi.classList.add("past");
-            } else {
                 itemLi.classList.add("past");
-            }
         }
     });
 }, 1000);
