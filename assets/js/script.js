@@ -52,9 +52,9 @@ function loadItems(){
         });
     });
 
-    $(".card .list-group").each(function(){
-        auditItems(this);
-    });
+    // $(".card .list-group").each(function(){
+    //     auditItems(this);
+    // });
 };
 
 function saveItems() {
@@ -133,7 +133,6 @@ var index = $(this)
 
 items[status][index].item = text;
 
-    $(".saveBtn").on("click", function() {
     // Converts textarea back into a p element
     console.log(text)
     var taskP = $("<p>")
@@ -142,7 +141,9 @@ items[status][index].item = text;
 
 // replace textArea with recreated p element
 $("textarea").replaceWith(taskP);
-})
+
+//     $(".saveBtn").on("click", function() {
+// })
 
 saveItems();
 });
@@ -265,27 +266,39 @@ function auditNewItem() {
     }
 }
 
-function auditItems(itemEl) {
-    var itemTime = $(itemEl).find("span").text().trim();
-    var itemMoment = moment(itemTime, "h:mm A");
-    var currentTime = moment();
+// function auditItems(itemEl) {
+//     var itemTime = $(itemEl).find("span").text().trim();
+//     var itemMoment = moment(itemTime, "h:mm A");
+//     var currentTime = moment();
 
-    var itemLi = $(itemEl).find("li");
+//     var itemLi = $(itemEl).find("li");
 
-    if (currentTime.subtract(30, 'minutes') <= itemMoment) {
-        itemLi.addClass("future");
-    } else if (currentTime.isBefore(itemMoment)){
-        itemLi.addClass("present");
-    } else {
-        itemLi.addClass("past");
-    }
-}
+//     if (currentTime.subtract(30, 'minutes') <= itemMoment) {
+//         itemLi.addClass("future");
+//     } else if (currentTime.isBefore(itemMoment)){
+//         itemLi.addClass("present");
+//     } else {
+//         itemLi.addClass("past");
+//     }
+// }
 
 setInterval(function() {
     $(".card .list-group").each(function(){
-        auditItems(this);
+        var itemTime = $(itemEl).find("span").text().trim();
+        var itemMoment = moment(itemTime, "h:mm A");
+        var currentTime = moment();
+    
+        var itemLi = $(itemEl).find("li");
+    
+        if (currentTime.subtract(30, 'minutes') <= itemMoment) {
+            itemLi.addClass("future");
+        } else if (currentTime.isBefore(itemMoment)){
+            itemLi.addClass("present");
+        } else {
+            itemLi.addClass("past");
+        }
     });
-}, (1000 * 60) * 30);
+}, (1000 * 60) * 5);
 
 loadItems();
 
@@ -303,7 +316,7 @@ loadItems();
   FivePMEl.addEventListener("click", idCapture);
 
 // Trash Can Event Listener
-    $(".list-group #trashCan").on("click",function(){
+    $("#trashCan").on("click",function(){
         var arrName = $(this)
         .closest(".card .list-group")
         .attr("id")
