@@ -63,16 +63,16 @@ function saveItems() {
 
 function createItems(itemText, time, itemButton) {
     var itemLi = $("<li>")
-        .addClass("list-group-item w-100 border-dark");
+        .attr("class", "list-group-item w-100 border-dark");
     var itemP = $("<p>")
-        .addClass("m-1 w-75")
+        .attr("class", "m-1 w-75")
         .text(itemText);
     var itemSpan = $("<span>")
-        .addClass("badge badge-dark")
+        .attr("class", "badge badge-dark")
         .attr('id', 'item-time')
         .text(time);
     var trashCanButton = $("<button>")
-        .addClass("btn btn-danger")
+        .attr("class", "btn btn-danger")
         .attr("id", "trashCan");
     var trashCanIcon = $("<span>")
         .addClass("oi oi-trash");
@@ -291,14 +291,20 @@ setInterval(function() {
         var itemLi = $(itemEl).find("li");
     
         if (currentTime.subtract(30, 'minutes') <= itemMoment) {
-            itemLi.addClass("future");
+            itemLi.classList.remove("present");
+            itemLi.classList.remove("past");
+            itemLi.classList.add("future");
         } else if (currentTime.isBefore(itemMoment)){
-            itemLi.addClass("present");
+            itemLi.classList.remove("future");
+            itemLi.classList.remove("past");
+            itemLi.classList.add("present");
         } else {
-            itemLi.addClass("past");
+            itemLi.classList.remove("future");
+            itemLi.classList.remove("present");
+            itemLi.classList.add("past");
         }
     });
-}, (1000 * 60) * 5);
+}, 1000);
 
 loadItems();
 
@@ -316,7 +322,7 @@ loadItems();
   FivePMEl.addEventListener("click", idCapture);
 
 // Trash Can Event Listener
-    $("#trashCan").on("click",function(){
+    $("body").on("click", "#trashCan", function(){
         var arrName = $(this)
         .closest(".card .list-group")
         .attr("id")
