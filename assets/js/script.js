@@ -165,6 +165,7 @@ $("#item-form-modal").on("show.bs.modal", function() {
 // modal is fully visible
 $("#item-form-modal").on("shown.bs.modal", function() {
     // highlight textarea
+    $("#modalItemDescription").val("");
     $("#modalItemDescription").trigger("focus");
 
     // create new Li for hours option
